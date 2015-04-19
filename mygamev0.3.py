@@ -88,7 +88,6 @@ class World():
                 if block == '-':
                     self.platforms.append(Blocks(
                         self.posn_x, self.posn_y, block_size))
-                    print(self.posn_x, self.posn_y)
                 if block == 'G':
                     self.goals.append(Goals(self.posn_x, self.posn_y))
                     
@@ -128,16 +127,11 @@ class World():
         for block in self.goals:
             self.ball_plain = pygame.sprite.RenderPlain(self.goals)
             self.ball_plain.draw(screen)
-            #pygame.draw.rect(screen, self.color_goals, block, 0)
 
     def side_collide(self, player_rect):
         collide = 0
         for block in self.platforms:
             # Collision with right side of block
-            left = player_rect.collidepoint(block.rect.x+block_size,
-                                        block.rect.y)
-            #print (block.rect.right, block.rect.y-int(block_size/2),
-            #       player_rect.left, player_rect.y)
             if player_rect.collidepoint(block.rect.right,
                                         block.rect.bottom-int(block_size/2)):
                 collide = 1
@@ -147,7 +141,6 @@ class World():
                 overlap = player_rect.right - block.rect.left
                 self.move(overlap)
                 collide = -1
-        print(collide)
         return collide
 
 class Doom():
@@ -290,9 +283,9 @@ class Lava(pygame.sprite.Sprite):
 
     
 # options
-mult = 1
-screen_x = 600*mult
-screen_y = 400*mult
+mult = 1.5
+screen_x = int(600*mult)
+screen_y = int(400*mult)
 block_size = int(30*mult)
 game_name = "Awesome Raspberrylock size 30, posn_x 7050 posn_y 0"
 player_spawn_x = 50
@@ -305,7 +298,7 @@ player_width, player_height = int(30*mult), int(28*mult)
 
 
 
-ball_size = 15*mult
+ball_size = int(15*mult)
 ball_image = "dryer_ball.png"
 
 
